@@ -1,0 +1,184 @@
+Step 1 Create a script file.
+Log in to the openEuler operating system (OS) and run the following command to create
+a shell script:
+[root@openEuler ~]# vim user.sh
+Specify an interpreter for the script file in user.sh.
+#!/bin/bash
+
+
+Step 2 Add variables.
+Add the user name and password variables to the user.sh file for verification.
+#!/bin/bash
+username_file="root"
+password_file="123456"
+
+Step 3 Add the while loop.
+The code for adding the while loop to user.sh is as follows:
+#!/bin/bash
+username_file="root"
+password_file="123456"
+echo "Please enter username:"
+while :
+do
+ read username
+done
+
+Step 4 If the input is empty, continue the input.
+Add the if condition for checking whether the input is empty to the while loop.
+
+
+#!/bin/bash
+username_file="root"
+password_file="123456"
+echo "Please enter username:"
+while :
+do
+ read username
+ if test -z $username
+ then
+ echo "Please enter a non empty username:"
+ continue
+ fi
+done
+
+
+Step 5 If the input is correct, the loop exits.
+If the input is correct, the while loop exits.
+#!/bin/bash
+username_file="root"
+password_file="123456"
+echo "Please enter username:"
+while :
+do
+ read username
+ if test -z $username
+ then
+ echo "Please enter a non empty username:"
+ continue
+ elif test $username = $username_file
+ then
+ echo "User $username wants to login!"
+ break
+ fi
+done
+
+Step 6 If the input is incorrect, continue the input.
+If the input is incorrect, continue the while loop.
+
+#!/bin/bash
+username_file="root"
+password_file="123456"
+echo "Please enter username:"
+while :
+do
+ read username
+ if test -z $username
+ then
+ echo "Please enter a non empty username:"
+ continue
+ elif test $username = $username_file
+then
+ echo "User $username wants to login!"
+ break
+ else
+ echo "Incorrect! Please re-enter the username:"
+ continue
+ fi
+done
+
+agar ama ishy nakrd amayan bakar benin
+
+#!/bin/bash
+
+username_file="root"
+password_file="123456"
+
+while true; do
+    read -p "Please enter username: " username
+
+    if [ -z "$username" ]; then
+        echo "Username cannot be empty. Please try again."
+        continue
+    elif [ "$username" = "$username_file" ]; then
+        echo "User '$username' wants to login!"
+        break
+    else
+        echo "Incorrect username! Please try again."
+    fi
+done
+
+
+
+Step 7 Adding password verification.
+After the user name is verified, enter the password and verify it.
+#!/bin/bash
+username_file="root"
+password_file="123456"
+echo "Please enter username:"
+while :
+do
+ read username
+ if test -z $username
+ then
+ echo "Please enter a non empty username:"
+ continue
+ elif test $username = $username_file
+ then
+ echo "User $username wants to login!"
+ break
+ else
+ echo "Incorrect! Please re-enter the username:"
+ continue
+ fi
+done
+echo "Please enter password:"
+while :
+do
+ read password
+ if test -z $password
+ then
+ echo "Please enter a non empty password:"
+ continue
+ elif test $password -eq $password_file
+ then
+ echo "Welcome user $username login!"
+ break
+ else
+ echo "Incorrect! Please re-enter the password:"
+ continue
+ fi
+done
+
+
+Step 8 Verify the result.
+Save the script and exit the vim insert mode. Enter an empty user name and password,
+an incorrect user name and password, and a correct user name and password. The
+following shows an example:
+[root@openEuler ~]# sh user.sh
+Please enter username:
+root
+User root wants to login!
+Please enter password:
+a
+user.sh: line 29: test: a: integer expression expected
+Incorrect! Please re-enter the password:
+123456
+Welcome user root login!
+[root@openEuler ~]#
+⚫ Question: Why is an alarm generated during script execution? How to modify the
+script to clear the alarm?
+Answer: In this script, test compares numbers. Therefore, the entered value must be an
+integer, and "a" is a character. As a result, a system alarm is generated. To clear the
+alarm, replace -eq in the shell script with an equal sign (=).
+
+
+
+
+
+
+
+
+
+
+
+
