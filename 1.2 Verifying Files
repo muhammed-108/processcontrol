@@ -1,0 +1,51 @@
+Step 1 Verifying Files
+Add file verification to user.sh. The user.txt file stores the user name and password. If
+the user.txt file does not exist, the system prompts you to enter the user name and
+password and saves them to a user.txt file.
+#!/bin/bash
+while :
+do
+ if test -e user.txt
+ then
+ echo "Entering the Login Program:"
+ break
+ else
+ echo "The user does not exist. Enter the user registration program."
+ echo "Please enter username for storage:"
+ read username
+ echo "Please enter password for storage:"
+ read password
+ fi
+done
+username_file="root"
+password_file="123456"
+
+Step 2 Check the user name and password based on multiple conditions.
+Add the user name and password judgment.
+#!/bin/bash
+while :
+do
+ if test -e user.txt
+ then
+ echo "Entering the Login Program:"
+ break
+ else
+ echo "The user does not exist. Enter the user registration program."
+ echo "Please enter username for storage:"
+ read username
+ echo "Please enter password for storage:"
+ read password
+ if test -n $username -a -n $password
+ then
+ echo "$username $password" > user.txt
+echo "Storage Successed!"
+echo ""
+break
+ else
+ echo "Please enter a non empty username or password:"
+continue
+ fi
+ fi
+done
+………
+
